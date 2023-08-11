@@ -1,0 +1,66 @@
+Router 1
+--------
+en
+conf t
+
+int fa0/0 
+ip add 14.24.74.1 255.255.255.192
+no shut
+exit
+
+int serial2/0
+ip add 14.24.74.193 255.255.255.252
+no shut
+exit
+
+router ospf 10
+network 14.24.74.0 0.0.0.63 area 1
+network 14.24.74.192 0.0.0.3 area 1
+exit
+
+Router 2
+--------
+en
+conf t
+
+int fa0/0
+ip add 14.24.74.65 255.255.255.192
+no shut
+exit
+
+int serial2/0
+ip address 14.24.74.194 255.255.255.252
+no shut
+exit
+
+int serial3/0
+ip add 14.24.74.197 255.255.255.252
+no shut
+exit
+
+router ospf 10
+network 14.24.74.192 0.0.0.3 area 1
+network 14.24.74.196 0.0.0.3 area 2
+network 14.24.74.64 0.0.0.63 area 0
+exit
+
+
+Router 3
+--------
+en
+conf t
+
+int fa0/0
+ip add 14.24.74.129 255.255.255.192
+no shut
+exit
+
+int serial2/0
+ip add 14.24.74.198 255.255.255.252
+no shut
+exit
+
+router ospf 10
+network 14.24.74.196 0.0.0.3 area 2
+network 14.24.74.128 0.0.0.63 area 2
+exit

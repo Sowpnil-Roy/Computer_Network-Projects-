@@ -1,0 +1,65 @@
+Router 1
+--------
+en
+conf t
+
+int fa0/0
+ip add 11.0.0.1 255.0.0.0
+no shut
+exit
+
+int fa1/0
+ip add 12.0.0.1 255.0.0.0
+no shut
+exit
+
+router ospf 1
+network 11.0.0.0 0.255.255.255 area 1
+network 12.0.0.0 0.255.255.255 area 1
+exit
+
+Router 3
+--------
+en
+conf t
+
+int fa1/0
+ip add 12.0.0.2 255.0.0.0
+no shut
+exit
+
+int fa0/0
+ip add 15.0.0.1 255.0.0.0
+no shut
+exit
+
+int fa2/0
+ip add 13.0.0.1 255.0.0.0
+no shut
+exit
+
+router ospf 3
+network 13.0.0.0 0.255.255.255 area 2
+network 12.0.0.0 0.255.255.255 area 1
+network 15.0.0.0 0.255.255.255 area 0
+exit
+
+Router 2
+--------
+en
+conf t
+
+int fa1/0
+ip add 13.0.0.2 255.0.0.0
+no shut
+exit
+
+int fa0/0
+ip add 14.0.0.1 255.0.0.0
+no shut
+exit
+
+router ospf 2
+network 14.0.0.0 0.255.255.255 area 2
+network 13.0.0.0 0.255.255.255 area 2
+exit
